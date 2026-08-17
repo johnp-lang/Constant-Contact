@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Uniform: Constant Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Uniform brand palette (uniform.dev/media-kit) */
+    --ink: #001242;
+    --ink-2: #001C6C;
+    --paper: #F7F9FC;
+    --paper-2: #EAF0FB;
+    --signal: #DF0000;
+    --teal: #0036CF;
+    --text-dark: #001242;
+    --text-light: #F7F9FC;
+    --muted: #475880;
+    --muted-light: #7FA8E6;
+    --border: #D7E4F5;
+    --border-dark: #143168;
+    --font-display: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+  h1, h2, h3 { font-family: var(--font-display); margin: 0; letter-spacing: -0.01em; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--ink);
+    color: var(--text-light);
+    padding: 88px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 500px at 78% -10%, rgba(0,82,237,0.22), transparent 60%),
+                radial-gradient(ellipse 700px 500px at 5% 110%, rgba(223,0,0,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero h1 {
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    max-width: 15ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--signal); }
+  .hero p.lede {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    color: var(--muted-light);
+    max-width: 56ch;
+    margin: 22px 0 40px;
+  }
+
+  /* ---------- SECTION SHELLS ---------- */
+  section { padding: 64px 0; }
+  section.tight { padding: 48px 0; }
+  .section-head { max-width: 62ch; margin-bottom: 36px; }
+  .section-head h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+  .section-head p { color: var(--muted); font-size: 1.02rem; margin-top: 10px; }
+
+  /* ---------- PERSONALIZATION STRIP ---------- */
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .req-card {
+    background: var(--paper);
+    padding: 26px 28px;
+  }
+  .req-card .req-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .req-card .req-said {
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    margin: 0 0 12px;
+  }
+  .req-card .req-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .req-card .req-answer {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .req-card .req-answer strong { color: var(--text-dark); }
+
+  /* ---------- WHY UNIFORM 5 POINTS ---------- */
+  .points { counter-reset: pt; }
+  .point {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+  }
+  .point:last-child { border-bottom: 1px solid var(--border); }
+  .point-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--signal);
+    font-weight: 700;
+    padding-top: 4px;
+  }
+  .point h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .point p { color: var(--muted); margin: 0 0 8px; font-size: 0.98rem; }
+  .point p.contrast { color: var(--text-dark); }
+  .point p.contrast::before { content: "vs. Contentful — "; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* ---------- COMMERCIAL/SECURITY ---------- */
+  .align-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .align-list li {
+    border: 1px solid var(--border);
+    padding: 20px;
+    font-size: 0.92rem;
+    color: var(--muted);
+    background: var(--paper-2);
+  }
+  .align-list li strong { display: block; color: var(--text-dark); font-family: var(--font-display); font-size: 0.98rem; margin-bottom: 6px; }
+
+  /* ---------- CONTACT CARDS ---------- */
+  .contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .contact-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--border);
+    background: var(--paper-2);
+    padding: 22px;
+  }
+  .avatar {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-light);
+  }
+  .avatar.ae { background: linear-gradient(135deg, var(--teal), var(--ink-2)); }
+  .avatar.se { background: linear-gradient(135deg, #498DFF, var(--teal)); }
+  .contact-meta .name { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; }
+  .contact-meta .role { font-size: 0.82rem; color: var(--muted); margin: 2px 0 8px; }
+  .contact-meta a.email {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--teal);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--muted-light);
+    padding: 40px 0 48px;
+  }
+  footer .foot-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  footer p { font-size: 0.85rem; margin: 0 0 14px; max-width: 70ch; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    .point { grid-template-columns: 1fr; }
+    .point-num { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Prepared for Constant Contact</p>
+    <h1>Your front-of-site should react as fast as your <em>audience segments</em> do.</h1>
+    <p class="lede">
+      Right now, shipping or changing a vertical page runs through an engineering ticket, and the
+      signals to personalize by industry are already sitting in Tealium &mdash; they're just not
+      reaching the page. Contentful isn't going to close that gap. Replacing it with Uniform is.
+    </p>
+  </div>
+</section>
+
+<section id="requirements">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What you told us</p>
+      <h2>Built from the requirements you shared</h2>
+      <p>Every item below maps directly to something Klodi sent over ahead of the demo, or came
+        up in the discovery call with Adi and Eileen on August 14th &mdash; not a generic feature list.</p>
+    </div>
+    <div class="req-grid">
+      <div class="req-card">
+        <span class="req-tag">Marketer self-service</span>
+        <p class="req-said">"Content changes can be live within hours, not days &mdash; without
+          engineering dependency or ticketing."</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer"><strong>Canvas</strong> gives your marketing team inline editing,
+          templates, and reusable patterns directly &mdash; the same visual workspace Rob
+          demoed, no ticket required.</p>
+      </div>
+      <div class="req-card">
+        <span class="req-tag">Personalization by vertical</span>
+        <p class="req-said">Rule-based targeting by traffic source, device, geography, and
+          audience list &mdash; "compatible with Tealium AudienceStream."</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer">Uniform's personalization engine reads Tealium signals directly at
+          the edge, flicker-free &mdash; no new CDP, no separate personalization tool to license.</p>
+      </div>
+      <div class="req-card">
+        <span class="req-tag">Core Web Vitals</span>
+        <p class="req-said">"CMS does not introduce render-blocking scripts or excessive
+          JavaScript payload. Supports image optimization, lazy loading, and CDN delivery."</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer">Edge-first delivery, deployable on any CDN &mdash; including your
+          existing Vercel setup &mdash; with image optimization and lazy loading built in, not
+          bolted on.</p>
+      </div>
+      <div class="req-card">
+        <span class="req-tag">AI-assisted page creation</span>
+        <p class="req-said">Interest in AI-enabled page generation aligned to your brand assets,
+          as part of the strategy team's broader AI enablement initiative.</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer"><strong>Uniform Code</strong> generates components and pages from
+          screenshots or Figma, aligned to your design language, and syncs to GitHub for review
+          &mdash; not a black box your developers can't inspect.</p>
+      </div>
+      <div class="req-card">
+        <span class="req-tag">Developer extensibility</span>
+        <p class="req-said">Front-of-site engineering needs to keep working in React/Next.js,
+          with custom components and GitHub sync &mdash; not lose control of the codebase.</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer">Custom components stay first-class Uniform entities with their own
+          fields and patterns, built in Cursor, VS Code, or Uniform Code, on your existing
+          React/Next.js stack.</p>
+      </div>
+      <div class="req-card">
+        <span class="req-tag">Migration risk</span>
+        <p class="req-said">"How do we migrate away from Contentful?" &mdash; need adapters,
+          effort estimates, and a plan for the existing structured JSON content model.</p>
+        <span class="req-arrow">&rarr;</span>
+        <p class="req-answer">Contentful is one of the more straightforward systems to migrate
+          out of. <strong>Siphon</strong> plus a phased cutover means no rebuild deadline &mdash;
+          and John's already offered a free POC migration scoping to size the effort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" style="background: var(--paper-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why Uniform, specifically over Contentful</p>
+      <h2>Five reasons to move off Contentful now</h2>
+    </div>
+    <div class="points">
+      <div class="point">
+        <div class="point-num">01</div>
+        <div>
+          <h3>Everything else in your stack stays exactly as it is</h3>
+          <p>Uniform becomes the system of record for content, replacing Contentful outright. What
+            doesn't change: Vercel hosting, the React/Next.js front-end, and Tealium as the CDP
+            all stay exactly as they are.</p>
+          <p class="contrast">Contentful was acquired by Salesforce in June 2026. Its roadmap now
+            answers to Salesforce's priorities, not just its own customers' &mdash; one more reason
+            this is the right moment to move off it rather than build further on top of it.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">02</div>
+        <div>
+          <h3>Personalization built in, not bolted on</h3>
+          <p>Rule-based targeting by vertical, geography, device, and audience list runs natively
+            at the edge, reading straight from Tealium &mdash; the exact requirement Klodi sent over.</p>
+          <p class="contrast">Contentful has no native personalization layer; it typically
+            requires a third-party add-on to do what you're asking for out of the box.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">03</div>
+        <div>
+          <h3>Content management and page composition, in one system</h3>
+          <p>Once migrated, Uniform holds the content <em>and</em> gives marketing a visual
+            workspace to build and edit pages directly &mdash; the shift from "engineering ships
+            every page" to "marketing ships in hours," with nothing left behind in Contentful.</p>
+          <p class="contrast">Contentful stores structured content well, but someone still has to
+            turn that content into a page. Today, that someone is your front-of-site team &mdash;
+            and it stays that way as long as Contentful stays in place.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">04</div>
+        <div>
+          <h3>A migration path that starts where you already are</h3>
+          <p>Siphon extracts your existing structured entries into a neutral format, and the
+            Contentful integration allows a phased cutover instead of a hard deadline.</p>
+          <p class="contrast">Contentful's own structured content model is actually one of the
+            more migration-friendly ones we see &mdash; this isn't a rebuild-from-scratch project.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">05</div>
+        <div>
+          <h3>Built for AI-assisted creation, not retrofitted for it</h3>
+          <p>Uniform Code generates components and pages from screenshots or Figma, aligned to
+            your brand assets, with structured content underneath that's already legible to AI
+            tooling &mdash; directly supporting the AI enablement initiative driving this evaluation.</p>
+          <p class="contrast">Contentful's content model wasn't built with agentic or AI-assisted
+            authoring in mind; that layer gets bolted on rather than designed in from the start.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="alignment">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Commercial and security alignment</p>
+      <h2>What your evaluation checklist needs to hear</h2>
+    </div>
+    <ul class="align-list">
+      <li><strong>SOC 2 Type II</strong>Uniform is SOC 2 Type II certified &mdash; ask your SE for
+        the current report during the technical deep dive.</li>
+      <li><strong>Data handling</strong>Uniform does not train models on customer content or data.
+        Behavioral/personalization signals are processed at the edge, not warehoused by default.</li>
+      <li><strong>Contractual SLA</strong>Support and uptime commitments are contractual and tiered
+        (Silver/Gold/Platinum) &mdash; we'll size the right tier once front-of-site engineering
+        weighs in on criticality.</li>
+      <li><strong>Dedicated migration support</strong>Siphon migration tooling plus a services team
+        for the Contentful cutover &mdash; not a self-serve export and hope for the best.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="roi" style="background: var(--paper-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Model your own impact</p>
+      <h2>What does closing the dev bottleneck actually free up?</h2>
+      <p>Defaults below are seeded from what came up on the call &mdash; adjust anything to match
+        your own numbers. No cost or pricing figures here, just time and velocity.</p>
+    </div>
+
+    <!-- ROI CALCULATOR COMPONENT -->
+    <section class="roi" id="roi-calculator">
+      <style>
+        #roi-calculator {
+          --accent: #0036CF;
+          --bg-panel: #F7F9FC;
+          --text: #001242;
+          --text-muted: #475880;
+          --border: #D7E4F5;
+          --font-display: 'DM Sans', sans-serif;
+          --font-body: 'DM Sans', sans-serif;
+          font-family: var(--font-body);
+          color: var(--text);
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          background: var(--bg-panel);
+          overflow: hidden;
+        }
+        #roi-calculator .roi-summary {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 1.75rem;
+          cursor: pointer;
+          user-select: none;
+          list-style: none;
+        }
+        #roi-calculator .roi-summary::-webkit-details-marker { display: none; }
+        #roi-calculator .roi-headline {
+          font-family: var(--font-display);
+          font-size: clamp(1.5rem, 3vw, 2.1rem);
+          font-weight: 700;
+          line-height: 1.1;
+        }
+        #roi-calculator .roi-headline small {
+          display: block;
+          font-family: var(--font-body);
+          font-size: 0.85rem;
+          font-weight: 400;
+          color: var(--text-muted);
+          margin-top: 8px;
+        }
+        #roi-calculator .roi-toggle-label {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          font-weight: 700;
+          color: var(--accent);
+          white-space: nowrap;
+        }
+        #roi-calculator .roi-body { padding: 0 1.75rem 1.75rem; border-top: 1px solid var(--border); }
+        #roi-calculator .roi-lever { padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+        #roi-calculator .roi-lever:last-of-type { border-bottom: none; }
+        #roi-calculator .roi-lever h4 { font-family: var(--font-display); margin: 0 0 0.9rem; font-size: 1rem; }
+        #roi-calculator .roi-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem; font-size: 0.9rem; }
+        #roi-calculator .roi-row label { flex: 0 0 250px; color: var(--text-muted); }
+        #roi-calculator .roi-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+        #roi-calculator .roi-row input[type="number"] {
+          width: 110px; padding: 0.35rem 0.5rem; border: 1px solid var(--border);
+          border-radius: 4px; font: inherit;
+        }
+        #roi-calculator .roi-row output { flex: 0 0 74px; text-align: right; font-family: 'DM Mono', monospace; font-weight: 700; font-size: 0.85rem; }
+        #roi-calculator .roi-result { font-family: 'DM Mono', monospace; font-weight: 700; color: var(--accent); }
+        #roi-calculator .roi-disclaimer {
+          margin-top: 1.4rem; padding: 1rem 1.1rem; background: rgba(0,18,66,0.04);
+          border: 1px solid var(--border); border-radius: 4px; font-size: 0.8rem;
+          color: var(--text-muted); line-height: 1.55;
+        }
+      </style>
+
+      <details>
+        <summary class="roi-summary">
+          <div class="roi-headline">
+            <span id="roi-total">0</span> engineering hours reclaimed per year
+            <small>From reduced ticket dependency and faster launches &mdash; adjust below</small>
+          </div>
+          <span class="roi-toggle-label">See how we calculated this &darr;</span>
+        </summary>
+
+        <div class="roi-body">
+          <div class="roi-lever">
+            <h4>1. Reduced engineering dependency for page changes</h4>
+            <div class="roi-row">
+              <label for="roi-hours">Monthly eng./ticket hours on front-of-site page changes</label>
+              <input type="range" id="roi-hours" min="0" max="200" value="40" step="5">
+              <output for="roi-hours" id="roi-hours-out">40</output>
+            </div>
+            <div class="roi-row">
+              <label for="roi-reduction">Expected reduction once marketing self-serves via Canvas</label>
+              <input type="range" id="roi-reduction" min="0" max="100" value="50" step="5">
+              <output for="roi-reduction" id="roi-reduction-out">50%</output>
+            </div>
+            <div class="roi-row">
+              <span style="color: var(--text-muted);">Engineering hours reclaimed per year:</span>
+              <span class="roi-result" id="roi-savings-out">0 hrs</span>
+            </div>
+          </div>
+
+          <div class="roi-lever">
+            <h4>2. Vertical personalization reach</h4>
+            <div class="roi-row">
+              <label for="roi-verticals">Industry verticals you want to personalize for</label>
+              <input type="range" id="roi-verticals" min="0" max="20" value="8" step="1">
+              <output for="roi-verticals" id="roi-verticals-out">8</output>
+            </div>
+            <div class="roi-row">
+              <label for="roi-lift">Expected conversion/engagement lift from personalization</label>
+              <input type="range" id="roi-lift" min="0" max="10" value="3" step="0.5">
+              <output for="roi-lift" id="roi-lift-out">3%</output>
+            </div>
+            <div class="roi-row">
+              <span style="color: var(--text-muted);">Verticals served a tailored experience, day one:</span>
+              <span class="roi-result" id="roi-verticals-out2">8 of 8</span>
+            </div>
+          </div>
+
+          <div class="roi-lever">
+            <h4>3. Faster campaign and vertical page launches</h4>
+            <div class="roi-row">
+              <label for="roi-launches">Vertical/campaign page launches per year</label>
+              <input type="range" id="roi-launches" min="0" max="24" value="8" step="1">
+              <output for="roi-launches" id="roi-launches-out">8</output>
+            </div>
+            <div class="roi-row">
+              <label for="roi-weeks">Weeks saved per launch (no ticket queue)</label>
+              <input type="range" id="roi-weeks" min="0" max="8" value="1.5" step="0.5">
+              <output for="roi-weeks" id="roi-weeks-out">1.5</output>
+            </div>
+            <div class="roi-row">
+              <span style="color: var(--text-muted);">Weeks back on the roadmap per year:</span>
+              <span class="roi-result" id="roi-ttm-out">12 weeks</span>
+            </div>
+          </div>
+
+          <p class="roi-disclaimer">
+            These figures are directional. The eng.-hours and reduction defaults reflect what came
+            up as "heavy dev lift" on the August 14th call, not a measured baseline &mdash; adjust
+            any input above to model Constant Contact's real numbers. This calculator deliberately
+            covers time and reach only, not cost or pricing &mdash; that's a separate conversation
+            once scope is confirmed with front-of-site engineering.
+          </p>
+        </div>
+      </details>
+
+      <script>
+        (function () {
+          var root = document.getElementById('roi-calculator');
+          var $ = function(id){ return root.querySelector('#' + id); };
+
+          function recalc() {
+            var hours = +$('roi-hours').value;
+            var reduction = +$('roi-reduction').value / 100;
+            var verticals = +$('roi-verticals').value;
+            var lift = +$('roi-lift').value;
+            var launches = +$('roi-launches').value;
+            var weeks = +$('roi-weeks').value;
+
+            $('roi-hours-out').textContent = hours;
+            $('roi-reduction-out').textContent = Math.round(reduction * 100) + '%';
+            $('roi-verticals-out').textContent = verticals;
+            $('roi-lift-out').textContent = lift + '%';
+            $('roi-launches-out').textContent = launches;
+            $('roi-weeks-out').textContent = weeks;
+
+            var annualHoursReclaimed = Math.round(hours * reduction * 12);
+            var ttmWeeks = Math.round(launches * weeks);
+
+            $('roi-savings-out').textContent = annualHoursReclaimed.toLocaleString('en-US') + ' hrs';
+            $('roi-verticals-out2').textContent = verticals + ' of ' + verticals;
+            $('roi-ttm-out').textContent = ttmWeeks + ' weeks';
+
+            $('roi-total').textContent = annualHoursReclaimed.toLocaleString('en-US');
+          }
+
+          root.querySelectorAll('input').forEach(function(el){ el.addEventListener('input', recalc); });
+          recalc();
+        })();
+      </script>
+    </section>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Your Uniform team</p>
+      <h2>Who you're working with</h2>
+    </div>
+    <div class="contacts">
+      <div class="contact-card">
+        <div class="avatar ae">JP</div>
+        <div class="contact-meta">
+          <div class="name">John Prachar</div>
+          <div class="role">Account Executive</div>
+          <a class="email" href="mailto:johnp@uniform.dev">johnp@uniform.dev</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="avatar se">RC</div>
+        <div class="contact-meta">
+          <div class="name">Rob Curlette</div>
+          <div class="role">Senior Solution Engineer, Pre-Sales</div>
+          <a class="email" href="mailto:rcurlette@uniform.dev">rcurlette@uniform.dev</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-title">Sourcing note</p>
+    <p>
+      This page was built from the requirements Klodi Beqiri sent by email on August 10th, 2026,
+      and the discovery/demo call with Aditya Sriram and Eileen Erkan on August 14th, 2026
+      (recorded in Fathom), plus the Constant Contact HubSpot deal record and the internal
+      #opp-constantcontact Slack channel. No separate requirements spreadsheet or document had
+      been uploaded as of this page's creation &mdash; if one exists, it should be folded in
+      before this goes back to the customer.
+    </p>
+    <p class="foot-title">A note on the numbers above</p>
+    <p>
+      The impact calculator's defaults are directional, built from what came up in discovery, not
+      a measured baseline for Constant Contact specifically &mdash; adjust any input to model your
+      own numbers. It intentionally covers time and reach only; cost and pricing are a separate
+      conversation for a separate document once scope is confirmed with front-of-site engineering.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
